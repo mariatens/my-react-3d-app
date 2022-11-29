@@ -2,6 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -9,6 +10,7 @@ function App() {
   return (
     <div id="canvas-container">
       <Canvas>
+        <OrbitControls/>
         <ambientLight intensity={0.1} />
         {/* shadows */}
         <directionalLight color="white" position={[0, 0, 5]} />
