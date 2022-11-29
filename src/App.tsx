@@ -1,37 +1,31 @@
-import { useState } from 'react'
 import './App.css'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei' 
 
 function App() {
-  const [count, setCount] = useState(0)
   const boxArr: JSX.Element[] = []
+
   for (let i= 0; i<100;i++){
-    boxArr.push(<YellowBox/>)
+    boxArr.push(<YellowBox args={randomDimension()} 
+      color={pick(palette)} 
+      position={randomPosition(5)}/>)
   }
   return (
     <div id="canvas-container">
       <Canvas>
-        <OrbitControls  autoRotate={true} autoRotateSpeed={20}/>
+        <OrbitControls autoRotate={true} autoRotateSpeed={20}/>
         <ambientLight intensity={0.1} />
         {/* shadows */}
         <directionalLight color="white" position={[0, 0, 5]} />
         <directionalLight color="grey" position={[-10, 2, 0]} />
         {/* <MagentaBox/> */}
         {boxArr}
-
       </Canvas>
     </div>
   )
 }
 
 export default App
-
-//10 random colors positions dimensions boxes/meshes
-//function for random position
-
-//function for random size
-//function for random color
 
 const palette = [
   "#e94e77",
@@ -40,7 +34,7 @@ const palette = [
   "#c6e5d9",
   "#f4ead5"
 ]
-export function pick<T>(arr: T[]): T {
+function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 function randomDimension(): [number, number, number]{
@@ -57,14 +51,18 @@ function randomPosition(range: number): [number, number, number]{
   ]
 }
 
+interface YellowBoxProps{
+  position: [number, number, number]
+  color: string
+  args: [number, number, number]
+}
 
-
-function YellowBox(): JSX.Element {
-  return <mesh position={randomPosition(4)}>
+function YellowBox(props: YellowBoxProps): JSX.Element {
+  return <mesh position={props.position}>
     {/* material */}
-    <meshStandardMaterial color= {pick(palette)}/>
+    <meshStandardMaterial color= {props.color}/>
     {/* geometry */}
-    <boxGeometry args={randomDimension()} />
+    <boxGeometry args={props.args} />
   </mesh>
 }
 
