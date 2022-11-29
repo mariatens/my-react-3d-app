@@ -6,16 +6,21 @@ import { OrbitControls } from '@react-three/drei'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const boxArr: JSX.Element[] = []
+  for (let i= 0; i<100;i++){
+    boxArr.push(<YellowBox/>)
+  }
   return (
     <div id="canvas-container">
       <Canvas>
-        <OrbitControls />
+        <OrbitControls  autoRotate={false} autoRotateSpeed={10}/>
         <ambientLight intensity={0.1} />
         {/* shadows */}
         <directionalLight color="white" position={[0, 0, 5]} />
-        <MagentaBox/>
-        <YellowBox/>
+        <directionalLight color="grey" position={[-10, 2, 0]} />
+        {/* <MagentaBox/> */}
+        {boxArr}
+
       </Canvas>
     </div>
   )
@@ -23,18 +28,49 @@ function App() {
 
 export default App
 
-//
+//10 random colors positions dimensions boxes/meshes
+//function for random position
+
+//function for random size
+//function for random color
+
+const palette = [
+  "#e94e77",
+  "#d68189",
+  "#c6a49a",
+  "#c6e5d9",
+  "#f4ead5"
+]
+export function pick<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+function randomDimension(): [number, number, number]{
+  const w = Math.random()
+  const h = Math.random()
+  const d = Math.random()
+  return [w,h,d]
+}
+function randomPosition(range: number): [number, number, number]{
+  return [
+    (Math.random()-0.5)*range,
+    (Math.random()-0.5)*range,
+    (Math.random()-0.5)*range
+  ]
+}
+
+
+
 function YellowBox(): JSX.Element {
-  return <mesh position={[0, -2, 0]}>
+  return <mesh position={randomPosition(4)}>
     {/* material */}
-    <meshStandardMaterial color="yellow" />
+    <meshStandardMaterial color= {pick(palette)}/>
     {/* geometry */}
-    <boxGeometry args={[5, 2, 1]} />
+    <boxGeometry args={randomDimension()} />
   </mesh>
 }
 
 function MagentaBox(): JSX.Element {
-  return (<mesh position={[2, 0, 0]}>
+  return (<mesh position={[0, 0, 0]}>
     {/* material */}
     <meshStandardMaterial color="magenta" />
     {/* geometry */}
