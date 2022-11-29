@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
@@ -13,7 +12,7 @@ function App() {
   return (
     <div id="canvas-container">
       <Canvas>
-        <OrbitControls  autoRotate={false} autoRotateSpeed={10}/>
+        <OrbitControls  autoRotate={true} autoRotateSpeed={20}/>
         <ambientLight intensity={0.1} />
         {/* shadows */}
         <directionalLight color="white" position={[0, 0, 5]} />
