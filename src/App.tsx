@@ -1,19 +1,24 @@
 import './App.css'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei' 
+import { useState } from 'react'
 
 function App() {
   const boxArr: JSX.Element[] = []
+  const [autoRotate, setAutoRotate] = useState(false);
 
   for (let i= 0; i<100;i++){
     boxArr.push(<YellowBox args={randomDimension()} 
       color={pick(palette)} 
-      position={randomPosition(5)}/>)
+      position={randomPosition(10)}/>)
   }
   return (
+    <>
     <div id="canvas-container">
+    <button className = "button" onClick = {()=> setAutoRotate(!autoRotate)}>{autoRotate === true ? "Click here to stop rotation": "Click here to start rotation"}</button>
+
       <Canvas>
-        <OrbitControls autoRotate={true} autoRotateSpeed={20}/>
+        <OrbitControls autoRotate={autoRotate} autoRotateSpeed={20}/>
         <ambientLight intensity={0.1} />
         {/* shadows */}
         <directionalLight color="white" position={[0, 0, 5]} />
@@ -22,6 +27,7 @@ function App() {
         {boxArr}
       </Canvas>
     </div>
+    </>
   )
 }
 

@@ -1,6 +1,7 @@
-/* class is with dot  */
-/* id only 1 of them has #*/
-
+.button{
+  background-color: pink;
+  padding: 10px;
+}
 #root{
   width: 100%;
   height: 100%;
@@ -18,5 +19,3 @@ body{
   margin: 0;
   padding: 0;
 }
-
-/* tag */
