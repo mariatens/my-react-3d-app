@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from 'react'
 function App() {
   const [autoRotate, setAutoRotate] = useState(false);
 
-  //Generate IBox[] infos only once, on first render.  after that, give back the same value each time.
+  //Generate IBox[] variables only once, on first render
   const vars = useMemo(createBoxInfos, []);
 
 
