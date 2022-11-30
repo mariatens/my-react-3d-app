@@ -20,9 +20,9 @@ function App() {
     const varsTemp: IBox[] = []
     for (let i = 0; i < 1000; i++) {
       varsTemp.push({
-        id: i,  //it's just useful to have one!
+        id: i, 
         size: randomDimension(),
-        pos: randomPosition(10),
+        pos: randomPosition(15),
         color: pick(palette),
       });
     }
